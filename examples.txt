@@ -1,0 +1,1 @@
+~/bin/sfz --destdir ~/DESTDIR .
