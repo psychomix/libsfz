@@ -321,7 +321,7 @@ int main(int argc, char **argv) {
     fprintf (stderr, "Copyright (c) 2012 by DiCE/PsychoMix\n");
     fprintf (stderr, "http://www.psychomix.org\033[22;37m\n");
 
-    fprintf(stderr, "\nusage: %s [--dry-run, --destdir '/path/to/destination'] filename\n", argv[0]);
+    fprintf(stderr, "\nusage: %s [--dry-run, -D '/path/to/destination'] filename\n", argv[0]);
     exit(-1);
   }
 
@@ -337,13 +337,13 @@ int main(int argc, char **argv) {
 /* parse cmdline options */
     if (*argv[o] == '-') {
       if (!strcmp (argv[o], "--dry-run")) { DRY_RUN = 1; }
-      if (!strcmp (argv[o], "--destdir")) { snprintf (destdir, 512, "%s/", argv[++o]); }
+      if (!strcmp (argv[o], "-D")) { snprintf (destdir, 512, "%s/", argv[++o]); }
       continue;
     }
   }
 
   for (o=1; o<argc; o++) {
-    if (!strcmp (argv[o], "--destdir")) { o++; continue; }
+    if (!strcmp (argv[o], "-D")) { o++; continue; }
     if (*argv[o] != '-') { listdir (argv[o]); }
   }
 
