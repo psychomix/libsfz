@@ -15,7 +15,7 @@
 #define STRING  (1<<2)
 #define RVALUE  (1<<3)
 
-#define APP_VERSION "0.0.1b"
+#define APP_VERSION "0.0.1c"
 
 typedef struct {
   char *sample;
@@ -98,6 +98,10 @@ int process_sfz (char *sfz, char *destdir) {
 
       snprintf (fname, 255, "%s/%s", dirname, sfz);
       out = fopen (fname, "wb");
+      if (!out) {
+        fprintf (stderr, "Cannot create file '%s'\n", fname);
+        goto cancel;
+      }
     } else out = stderr;
 
 /* parse the buffer */
@@ -260,6 +264,7 @@ int process_sfz (char *sfz, char *destdir) {
       }
     }
 
+cancel:
     free (SAMPLES);
     file_close(&F);
     if (!DRY_RUN) { fclose (out); }
@@ -284,7 +289,7 @@ int listdir (char *dir) {
         if (*entry->d_name == '.') continue;
         if (entry->d_type & DT_DIR) { 
           snprintf (target, 512, "%s/%s", dir, entry->d_name);
-          printf ("\r          \r%s/%s\n", dir, entry->d_name);
+          printf ("\r          \r\033[01;37m%s/%s\033[22;37m\n", dir, entry->d_name);
           listdir (target); 
         }
         ptr = strrchr (entry->d_name, '.');
@@ -312,9 +317,9 @@ int main(int argc, char **argv) {
 
 /* usage information */
   if (argc == 1) {
-    fprintf (stderr, "SFZ %s\n", APP_VERSION);
+    fprintf (stderr, "\033[01;37mSFZ %s\n", APP_VERSION);
     fprintf (stderr, "Copyright (c) 2012 by DiCE/PsychoMix\n");
-    fprintf (stderr, "http://www.psychomix.org\n");
+    fprintf (stderr, "http://www.psychomix.org\033[22;37m\n");
 
     fprintf(stderr, "\nusage: %s [--dry-run, --destdir '/path/to/destination'] filename\n", argv[0]);
     exit(-1);
