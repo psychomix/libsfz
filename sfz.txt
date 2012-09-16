@@ -1,0 +1,45 @@
+/*
+  list of currently handled opcodes
+
+  descriptions taked from:
+  http://www.camelaudio.com/alchemymanual/sfz-files/
+ */
+
+//
+  Comment markers; text placed after comment markers is ignored.
+
+<group>
+  Used to define common values applied to all regions contained within the
+  group. Multiple groups may be defined, each containing one or more regions.
+
+<region>
+  Used to define keyboard zones. Multiple regions may be defined.
+
+sample
+  Load the referenced sample using settings defined in the current region and
+  group.
+
+  Full path or relative path specifications may be used to reference samples.
+
+pitch_keycenter
+  Specify the center pitch for a group or region. The range is 0-127. Samples
+  above or below the center pitch will be retuned.
+
+key
+  Specify the note that will trigger a sample. The range is 0-127.
+
+lokey
+  Specify the lowest note that will trigger a group or region. The range is
+  0-127. Notes between pitch_keycenter and lokey will cause the sample in a
+  region to be pitched down.
+
+hikey
+  Specify the highest note for a group or region. The range is 0-127. Notes
+  between pitch_keycenter and hikey will cause the sample in a region to be
+  pitched up.
+
+lovel
+  Specify the lowest velocity for a group or region. The range is 0-127.
+
+hivel
+  Specify the highest velocity for a group or region. The range is 0-127.
